@@ -1,0 +1,29 @@
+mkdir Rohit
+cd  Rohit
+touch file
+mkdir myfolder
+mv file myfolder/
+cp -p myfolder/file file.bkp
+rm -rf myfolder
+cd ~
+
+part b
+
+git clone https://github.com/TheAcademy/pss-orderbook-deploy/
+cd pss-orderbook-deploy
+cd src/linux_activities/Activity2
+
+
+part c
+
+cat stock_investments.txt
+head -5 stock_investments.txt
+tail -5 stock_investments.tx
+grep GOOG stock_investments.txt | wc -l
+grep -wc T stock_investments.txt
+grep -lir spy .
+grep -lvri spy .
+find . -type f -name *data*
+find . -type d -name error
+sudo find . -type f -name "*data*" -exec chmod 744 {} \;
+chmod -w WFC/data.txt
