@@ -1,0 +1,44 @@
+printenv
+export name=Josh
+echo "My name is $name"
+echo 'My name is $name'
+name=Brown
+echo $lname
+export name=Josh
+lname=Brown
+echo 'echo $name' > test.sh 
+echo 'echo $lname' >> test.sh 
+chmod +x test.sh
+./test.sh
+exit
+echo $name
+echo $lname
+less ~/.bash_profile
+echo 'export envname=Josh' >> ~/.bash_profile
+exit
+echo $PATH
+[[ ! -d "$HOME/.local/bin" ]] && mkdir -p $HOME/.local/bin && echo 'export PATH="$PATH:$HOME/.local/bin"' >> $HOME/.bash_profile && source $HOME/.bash_profile
+cat << EOF > welcome
+echo "Welcome \$USER"
+[[ \$1 = "date" ]] && echo "Today is \$(date)"
+EOF
+chmod +x welcome
+mv welcome $HOME/.local/bin
+welcome
+welcome date
+echo 'alias wd="welcome date"' >> ~/.bash_profile
+source ~/.bash_profile
+wd
+mkdir ~/scripts
+cd ~/scripts
+cat << EOF > ~/scripts/hello.py
+#!/usr/bin/env python3
+print("Hello World of Python")
+EOF
+
+chmod +x ~/scripts/hello.py
+./hello.py
+echo 'PATH=$PATH:$HOME/scripts' >> ~/.bash_profile
+source ~/.bash_profile
+echo $PATH
+sudo ln -s /usr/bin/python3 /usr/bin/py
