@@ -1,0 +1,32 @@
+    1  sudo yum update
+    2  sudo yum upgrade
+    3  sudo dnf install ansible
+    4  mkdir ~/ansible && cd ~/ansible
+    5  touch start_mysql_playbook.yaml”
+    6  ls
+    7  rm start_mysql_playbook.yaml”
+    8  ls
+    9  touch start_mysql_playbook.yaml
+   10  ls
+   11  vi start_mysql_playbook.yaml
+   12  touch stop_mysql_playbook.yaml
+   13  vi stop_mysql_playbook.yaml
+   14  ansible-playbook start_mysql_docker.yaml
+   15  ls
+   16  ansible-playbook start_mysql_playbook.yaml
+   17  sudo dnf install mariadb105
+   18  mysql -h127.0.0.1 -uroot -p
+   19  docker ps -a
+   20  sudo docker ps-a
+   21  sudo docker ps -a
+   22  mysql -h127.0.0.1 -uroot -p
+   23  sudo docker ps -a
+   24  sudo docker exec -itd --name mysql_server mysql -uroot -p
+   25  sudo docker exec -itd  mysql_server mysql -uroot -p
+   26  ls
+   27  sudo docker ps -a
+   28  ls
+   29  sudo docker exec -it  mysql_server mysql -uroot -p
+   30  history
+  
+  139  history > deploy_ansible.txt

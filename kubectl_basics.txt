@@ -1,0 +1,108 @@
+ 31  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/$(uname | awk '{print tolower($0)}')/amd64/kubectl
+   32  curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/$(uname | awk '{print tolower($0)}')/amd64/kubectl
+   33  chmod +x ./kubectl
+   34  sudo mv ./kubectl /usr/local/bin/kubectl
+   35  echo "-----BEGIN CERTIFICATE-----
+   36  MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+   37  cm5ldGVzMB4XDTIxMDMyMzE4NTUyNloXDTMxMDMyMTE4NTUyNlowFTETMBEGA1UE
+   38  AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOpH
+   39  Xnerbzenghu57y5DgGwxrWASjn16G5U/EGeMSzD294ggS0G/WFPkBWXUMLzKjczY
+   40  UvcpddvOFAIFpNTwAebGUQQ8Jx+Bl6SOIYwPjU7unmcYOMUTNMU26LyPff/VaGxj
+   41  7obJHreNOy0UrPmiISNl/EiMR1ZB/a7TYtSeYjY1hMR4N6RY2uvZFTtIpCfYlR2M
+   42  k+NAYcMlAx9vh9iICYi+T8rWIlvcBhpdmCwfLmj5YR1ySfjw0dEUlvHt/Zv9M6xI
+   43  6vZkMWz+8G8a+6RLIiFPSsr7mIwhmgZRqw09vvPlFvFWpc3chEw7vDJpucA86Iiy
+   44  px2PLb4Xi0/bRkcA8v8CAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+   45  /wQFMAMBAf8wHQYDVR0OBBYEFMe2OtCWn0/ouv/Ugq6hN+N/ZbUTMA0GCSqGSIb3
+   46  DQEBCwUAA4IBAQCQIlC0cIHuUtDV0OcE2MPVPhefA7Q/Gk0mZU2Ci9bmiAe3leBe
+   47  2qKF8ejf5qs8SQqo2UJVdRDS6zeIl776VlFAHvAAycG3Uak09/62Iip6iw4JKlL+
+   48  b4VydUrcIV70Al2aFGj1ggFl49SY3jvVSK8apGmZIYgNiZPZF8rFTWLVKbvRk4aT
+   49  2hQ/csi6UpH0i7h7Ch3SBwbCh5Etxu3ZborhWW9p+ggGXJyJ5RUdCvZcXkP4Srle
+   50  L65o//HtdiwiFDurYLqmp6Z1vL8yFNDO5VprvKZgEN1Ye9VlP6fMR55e7z/PT2pw
+   51  BDlsdGl0xgLf29QghjSG90pBEMNbh6JFaDcw
+   52  -----END CERTIFICATE-----
+   53  " \ > ca-mthree-sre-course.pem
+   54  kubectl config set-cluster mthree-sre-course --server=https://4D906421359E66F575717FB89D5D8071.gr7.us-east-1.eks.amazonaws.com --certificate-authority=ca-mthree-sre-course.pem --embed-certs
+   55  kubectl config set-credentials rohittej6@gmail.com@mthree-sre-course      --auth-provider=oidc      --auth-provider-arg='idp-issuer-url=https://dex.computerlab.online'      --auth-provider-arg='client-id=kubernetes'      --auth-provider-arg='client-secret=6L3rOl32T2Leuacb9B6yy7Owhe0JR5gHvwzxG1qHrt8='     --auth-provider-arg='refresh-token=Chl6ZnZwZ3hyZDRteG13M3RicGtudHBveHp3Ehltc25kNWh6dmJoN2NiY3BweG1pNGdxbXA0'     --auth-provider-arg='id-token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjYzYmRiNTE0OGEzYmI4NDk1OWY4MWNjOWQ2ZDYyYmI5MDgxN2Y2ZmIifQ.eyJpc3MiOiJodHRwczovL2RleC5jb21wdXRlcmxhYi5vbmxpbmUiLCJzdWIiOiJDZ2cxTlRRMU1qWTFPUklHWjJsMGFIVmkiLCJhdWQiOiJrdWJlcm5ldGVzIiwiZXhwIjoxNzQxNjY3MTYxLCJpYXQiOjE3NDE1ODA3NjEsImF0X2hhc2giOiJOLVBwWlJEWUw0VFBQS3lLSWVJRjJRIiwiY19oYXNoIjoiMkY0aEJxM2Z3VlRkSmpRejhxdkJaZyIsImVtYWlsIjoicm9oaXR0ZWo2QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJncm91cHMiOlsidGhlYWNhZGVteTpzcmUtY291cnNlIl0sIm5hbWUiOiJSb2hpdCBTYWkgVGVqYSAuTSIsInByZWZlcnJlZF91c2VybmFtZSI6IlJvaGl0QUkifQ.L9H1H3SlvPPNeHhlCNHtJULVh6cCxvgG_yBnOEDGIi7EOLoqyPuskbGtlZ0exYjLHcqc1jBJ_8ZYF6K0EHzB-Z_fO2-sQNs-Ejo2sv7Zv-lXRpL4SZTbpoWNDsJWnIo4dEY1Y0cKElBmEdQdG7FWnu-p933s3D2liRSUK7Va0DDboBOFDyCME9JgwrsrBKqPs48_b5PnsVVR3Nv4ypagr7_umEtsS7-hUAJ0ADH8mt9-iD4D6umTY0TX4WJfzThY5Jbly5EvTb1VDVm6ufE923dp-jmaIlqhJB3sTUtFgtN8Y4pDye-LY_pevXGfWS86Q9SjntjNwmlfx_14y2JeeQ'
+   56  kubectl config set-context mthree-sre-course --cluster=mthree-sre-course --user=rohittej6@gmail.com@mthree-sre-course
+   57  kubectl config use-context mthree-sre-course
+   58  rm ca-mthree-sre-course.pem
+   59                
+   60  ls
+   61  kubectl ns nde
+   62  kubectl ns node
+   63  pwd
+   64  ls
+   65  ll
+   66  ls
+   67  kubectl --help
+   68  kubectl version
+   69  ls
+   70  cd ansible
+   71  ls
+   72  cd ..
+   73  ll
+   74  chmod +x ./kubectl
+   75  curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/$(uname | awk '{print tolower($0)}')/amd64/kubectl
+   76  chmod +x ./kubectl
+   77  ll
+   78  sudo mv ./kubectl /usr/local/bin/kubectl
+   79  ll
+   80  echo "-----BEGIN CERTIFICATE-----
+   81  MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+   82  cm5ldGVzMB4XDTIxMDMyMzE4NTUyNloXDTMxMDMyMTE4NTUyNlowFTETMBEGA1UE
+   83  AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOpH
+   84  Xnerbzenghu57y5DgGwxrWASjn16G5U/EGeMSzD294ggS0G/WFPkBWXUMLzKjczY
+   85  UvcpddvOFAIFpNTwAebGUQQ8Jx+Bl6SOIYwPjU7unmcYOMUTNMU26LyPff/VaGxj
+   86  7obJHreNOy0UrPmiISNl/EiMR1ZB/a7TYtSeYjY1hMR4N6RY2uvZFTtIpCfYlR2M
+   87  k+NAYcMlAx9vh9iICYi+T8rWIlvcBhpdmCwfLmj5YR1ySfjw0dEUlvHt/Zv9M6xI
+   88  6vZkMWz+8G8a+6RLIiFPSsr7mIwhmgZRqw09vvPlFvFWpc3chEw7vDJpucA86Iiy
+   89  px2PLb4Xi0/bRkcA8v8CAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+   90  /wQFMAMBAf8wHQYDVR0OBBYEFMe2OtCWn0/ouv/Ugq6hN+N/ZbUTMA0GCSqGSIb3
+   91  DQEBCwUAA4IBAQCQIlC0cIHuUtDV0OcE2MPVPhefA7Q/Gk0mZU2Ci9bmiAe3leBe
+   92  2qKF8ejf5qs8SQqo2UJVdRDS6zeIl776VlFAHvAAycG3Uak09/62Iip6iw4JKlL+
+   93  b4VydUrcIV70Al2aFGj1ggFl49SY3jvVSK8apGmZIYgNiZPZF8rFTWLVKbvRk4aT
+   94  2hQ/csi6UpH0i7h7Ch3SBwbCh5Etxu3ZborhWW9p+ggGXJyJ5RUdCvZcXkP4Srle
+   95  L65o//HtdiwiFDurYLqmp6Z1vL8yFNDO5VprvKZgEN1Ye9VlP6fMR55e7z/PT2pw
+   96  BDlsdGl0xgLf29QghjSG90pBEMNbh6JFaDcw
+   97  -----END CERTIFICATE-----
+   98  " \ > ca-mthree-sre-course.pem
+   99  kubectl config set-cluster mthree-sre-course --server=https://4D906421359E66F575717FB89D5D8071.gr7.us-east-1.eks.amazonaws.com --certificate-authority=ca-mthree-sre-course.pem --embed-certs
+  100  kubectl config set-credentials rohittej6@gmail.com@mthree-sre-course      --auth-provider=oidc      --auth-provider-arg='idp-issuer-url=https://dex.computerlab.online'      --auth-provider-arg='client-id=kubernetes'      --auth-provider-arg='client-secret=6L3rOl32T2Leuacb9B6yy7Owhe0JR5gHvwzxG1qHrt8='     --auth-provider-arg='refresh-token=Chl6ZnZwZ3hyZDRteG13M3RicGtudHBveHp3Ehltc25kNWh6dmJoN2NiY3BweG1pNGdxbXA0'     --auth-provider-arg='id-token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjYzYmRiNTE0OGEzYmI4NDk1OWY4MWNjOWQ2ZDYyYmI5MDgxN2Y2ZmIifQ.eyJpc3MiOiJodHRwczovL2RleC5jb21wdXRlcmxhYi5vbmxpbmUiLCJzdWIiOiJDZ2cxTlRRMU1qWTFPUklHWjJsMGFIVmkiLCJhdWQiOiJrdWJlcm5ldGVzIiwiZXhwIjoxNzQxNjY3MTYxLCJpYXQiOjE3NDE1ODA3NjEsImF0X2hhc2giOiJOLVBwWlJEWUw0VFBQS3lLSWVJRjJRIiwiY19oYXNoIjoiMkY0aEJxM2Z3VlRkSmpRejhxdkJaZyIsImVtYWlsIjoicm9oaXR0ZWo2QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJncm91cHMiOlsidGhlYWNhZGVteTpzcmUtY291cnNlIl0sIm5hbWUiOiJSb2hpdCBTYWkgVGVqYSAuTSIsInByZWZlcnJlZF91c2VybmFtZSI6IlJvaGl0QUkifQ.L9H1H3SlvPPNeHhlCNHtJULVh6cCxvgG_yBnOEDGIi7EOLoqyPuskbGtlZ0exYjLHcqc1jBJ_8ZYF6K0EHzB-Z_fO2-sQNs-Ejo2sv7Zv-lXRpL4SZTbpoWNDsJWnIo4dEY1Y0cKElBmEdQdG7FWnu-p933s3D2liRSUK7Va0DDboBOFDyCME9JgwrsrBKqPs48_b5PnsVVR3Nv4ypagr7_umEtsS7-hUAJ0ADH8mt9-iD4D6umTY0TX4WJfzThY5Jbly5EvTb1VDVm6ufE923dp-jmaIlqhJB3sTUtFgtN8Y4pDye-LY_pevXGfWS86Q9SjntjNwmlfx_14y2JeeQ'
+  101  kubectl config set-context mthree-sre-course --cluster=mthree-sre-course --user=rohittej6@gmail.com@mthree-sre-course
+  102  kubectl config use-context mthree-sre-course
+  103  rm ca-mthree-sre-course.pem
+  104                
+  105  kubectl --version
+  106  kubectl version
+  107  kubectl pods
+  108  kubectl get pods
+  109  kubectl logs
+  110  kubectl get ns
+  111  kubectl get ns
+  112  kubectl get pods -n c405-team02-prod
+  113  kubectl get deployemnts -n c405-team02-prod
+  114  kubectl get deployments -n c405-team02-prod
+  115  kubectl get deployments -o wide -n c405-team02-prod
+  116  kubectl get services -n c405-team02-prod
+  117  kubectl get -all -n c405-team02-prod
+  118  kubectl get --all -n c405-team02-prod
+  119  kubectl get all -n c405-team02-prod
+  120  kubectl get replicaset -n c405-team02-prod
+  121  kubectl describe deployment mysqld-exporter -n c405-team02-prod
+  122  kubectl describe deployment mysqld-exporter -n c405-team02-prod -0 yaml
+  123  kubectl describe deployment mysqld-exporter -n c405-team02-prod -o yaml
+  124  kubectl get deployment mysqld-exporter -n c405-team02-prod -o yaml
+  125  kubectl logs mysqld-exporter-75bc68b9bc-zcnks -n c405-team02-prod --since=1h
+  126  kubectl logs mysqld-exporter-75bc68b9bc-zcnks -n c405-team02-prod --since=5m
+  127  kubectl get all -n c405-team02-prod
+  128  kubectl services -n c405-team02-prod
+  129  kubectl get services -n c405-team02-prod
+  130  kubectl get -list resources
+  131  ls
+  132  hsitory
+  133  history
+  134  kubectl get all -n c405-team02-prod
+  135  kubectl get ns
+  136  kubectl get pods -n c405-team01-prod
+  137  kubectl logs orderbookapi-7656cd64df-rptsv -n c405-team01-prod --since=1h
+  138  history
